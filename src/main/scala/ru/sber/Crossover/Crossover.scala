@@ -1,4 +1,4 @@
-package ru.sber
+package ru.sber.Crossover
 
 object Crossover {
 	def main(args: Array[String]) {
@@ -21,6 +21,7 @@ object Crossover {
 					chChr1, chChr2)
 				case Nil => (chr1, chr2)
 		}
+
 		val (a,  b) = crossover(points, chr1, chr2, chr1(0), chr2(0))
 		a.foreach(x => print(x))
 		println()
