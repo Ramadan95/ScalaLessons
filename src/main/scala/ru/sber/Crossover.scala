@@ -10,26 +10,26 @@ object Crossover {
 		println(chr2)
 		println("---------------------------------")
 
-		def crossover(points:List[Int], chr1:List[Char], chr2:List[Char], chChr1:Char, chChr2:Char): (List[Char], List[Char]) =
+		def crossover(points:List[Int], chr1:List[Char], chr2:List[Char], chChr1:Char, chChr2:Char):
+		(List[Char], List[Char]) =
 			points match {
-				case head :: next =>
-									chr1.zipWithIndex.collect{
-					case (x, i) if i > head => if (x == chChr1) chChr2 else chChr1};
-									chr2.zipWithIndex collect {
-					case (x, i) if i > head => if (x == chChr1) chChr2 else chChr1};
-									crossover(next, chr1, chr2, chChr1, chChr2)
+				case ::(head, next) => crossover(next,
+					chr1.zipWithIndex.
+					map(x => if (x._2 >= head) { if (x._1 == chChr1) chChr2 else chChr1 } else x._1),
+					chr2.zipWithIndex.
+					map(x => if (x._2.>= (head)) { if (x._1 == chChr1) chChr2 else chChr1 } else x._1),
+					chChr1, chChr2)
 				case Nil => (chr1, chr2)
 		}
-
 		val (a,  b) = crossover(points, chr1, chr2, chr1(0), chr2(0))
-		println(points)
-		println(a)
-		println(b)
+		a.foreach(x => print(x))
+		println()
+		b.foreach(x => print(x))
 	}
 }
 
 object Lesson {
-	val points	= List(2, 4, 5)
+	val points		= List(2, 4, 5)
 	val chr1		= List('x', 'x', 'x', 'x', 'x', 'x', 'x')
 	val chr2		= List('y', 'y', 'y', 'y', 'y', 'y', 'y')
 }
